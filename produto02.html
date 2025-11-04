@@ -4,44 +4,132 @@
     <meta charset="UTF-8">
     <title>Camisa Social - Moda Elegante</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS externo (padronizado do site) -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- CSS incorporado específico desta página -->
+    <style>
+        :root{
+            --page-bg: linear-gradient(180deg,var(--rose-pale),#fff);
+            --card-bg: rgba(255,255,255,0.95);
+            --accent: #ff6c99;
+            --muted: #7b4d63;
+            --text: #4a2a34;
+            --radius: 12px;
+        }
+
+        /* layout: header -> nav -> main -> footer */
+        html,body{height:100%;margin:0;font-family:'Baloo 2',system-ui,Arial;background:var(--page-bg);color:var(--text)}
+        .site{min-height:100vh;display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:16px;max-width:1100px;margin:0 auto;}
+
+        header.site-header{background:var(--card-bg);padding:18px;border-radius:var(--radius);text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.04)}
+        header.site-header h1{margin:0;color:var(--accent);font-size:24px}
+        header.site-header p{margin:6px 0 0;color:var(--muted)}
+
+        /* nav below header - CSS-only dynamic menu (checkbox) */
+        nav.site-nav{background:var(--card-bg);padding:10px;border-radius:var(--radius);box-shadow:0 8px 20px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
+        .nav-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .brand-small{font-weight:700;color:var(--accent);display:none}
+
+        /* checkbox hack */
+        .menu-toggle{position:absolute;left:-9999px}
+        label.menu-btn{display:none;cursor:pointer;padding:8px 12px;border-radius:10px;background:transparent;border:2px solid rgba(0,0,0,0.04);font-weight:700}
+        ul.menu-list{list-style:none;margin:0;padding:0;display:flex;gap:12px;align-items:center;justify-content:center}
+        ul.menu-list a{display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:700;border:2px solid transparent;transition:all .16s}
+        ul.menu-list a:hover{background:rgba(255,108,153,0.06);border-color:rgba(255,108,153,0.08)}
+        ul.menu-list a.active{background:linear-gradient(180deg,var(--accent),#ff84b3);color:#fff;box-shadow:0 8px 18px rgba(255,82,145,0.12)}
+
+        /* main content */
+        main.site-main{flex:1;padding:18px;background:transparent}
+        .product-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+        .media{border-radius:10px;overflow:hidden;background:var(--card-bg);padding:12px;box-shadow:0 8px 20px rgba(0,0,0,0.04)}
+        .media img{width:100%;height:auto;display:block;border-radius:8px}
+        .info{background:transparent}
+        .info p{color:var(--muted);line-height:1.5}
+        .btn-back{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#ff84b3);color:#fff;text-decoration:none;font-weight:700}
+
+        footer.site-footer{text-align:center;padding:14px;color:var(--muted);font-size:13px;background:transparent}
+
+        /* responsive: menu compact and stacked layout */
+        @media(max-width:820px){
+            .brand-small{display:block}
+            label.menu-btn{display:inline-block}
+            ul.menu-list{flex-direction:column;display:none;padding-top:8px}
+            .menu-toggle:checked + label.menu-btn + ul.menu-list{display:flex}
+            .product-wrap{grid-template-columns:1fr}
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Camisa Social</h1>
-        <nav>
-            <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="produtos.html">Produtos</a></li>
-            <li><a href="contato.html">Contato</a></li>
+    <div class="site">
+        <header class="site-header" style="background:linear-gradient(180deg,var(--rose-soft),transparent);">
+            <h1 style="font-size:26px;margin-bottom:6px">Camisa Social</h1>
+            <p style="margin:0;color:var(--muted)">Moda Elegante — acabamento premium</p>
+        </header>
+
+        <nav class="site-nav" aria-label="Menu principal">
+            <div class="nav-top">
+                <div class="brand-small" style="font-size:16px">Moda Elegante</div>
+                <div>
+                    <input id="menu-toggle" class="menu-toggle" type="checkbox" aria-hidden="true">
+                    <label for="menu-toggle" class="menu-btn" aria-hidden="true">☰ Menu</label>
+                </div>
+            </div>
+
+            <ul class="menu-list" role="menubar" aria-label="links principais">
+                <li role="none"><a role="menuitem" href="index.html">Início</a></li>
+                <li role="none"><a role="menuitem" href="produtos.html" class="active">Produtos</a></li>
+                <li role="none"><a role="menuitem" href="contato.html">Contato</a></li>
             </ul>
         </nav>
-        <figure>
-            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Camisa Social" width="200">
-            <figcaption>Camisa Social - Moda Elegante</figcaption>
-        </figure>
-        <video width="320" height="240" controls>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>
-    </header>
-    <main>
-        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Camisa Social" width="300">
-        <section>
-            <p>
-                A Camisa Social da Moda Elegante é ideal para quem busca sofisticação e conforto no dia a dia ou em ocasiões especiais.
-                Produzida com tecido de alta qualidade, oferece caimento perfeito e acabamento refinado, valorizando o visual em qualquer situação.
-            </p>
-            <p>
-                <strong>Características:</strong><br>
-                - Tecido: Algodão premium<br>
-                - Tamanhos: P, M, G, GG<br>
-                - Cores disponíveis: Branco, Azul, Preto<br>
-                - Fácil de passar e resistente a amassados
-            </p>
-        </section>
-        <nav>
-            <a href="produtos.html">Voltar para Produtos</a>
-        </nav>
-    </main>
+
+        <main class="site-main" role="main">
+            <div class="product-wrap">
+                <div class="media" role="region" aria-label="Imagens e vídeo do produto">
+                    <figure style="margin:0">
+                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Camisa Social" width="800" style="border-radius:8px">
+                        <figcaption style="margin-top:8px;color:var(--muted)">Camisa Social - Moda Elegante</figcaption>
+                    </figure>
+
+                    <div style="margin-top:12px">
+                        <video controls style="width:100%;border-radius:8px;background:transparent">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                </div>
+
+                <div class="info" role="region" aria-label="Informações do produto">
+                    <h2 style="margin-top:0;color:var(--accent)">Descrição</h2>
+                    <section>
+                        <p>
+                            A Camisa Social da Moda Elegante é ideal para quem busca sofisticação e conforto no dia a dia ou em ocasiões especiais.
+                            Produzida com tecido de alta qualidade, oferece caimento perfeito e acabamento refinado, valorizando o visual em qualquer situação.
+                        </p>
+
+                        <p>
+                            <strong>Características:</strong><br>
+                            - Tecido: Algodão premium<br>
+                            - Tamanhos: P, M, G, GG<br>
+                            - Cores disponíveis: Branco, Azul, Preto<br>
+                            - Fácil de passar e resistente a amassados
+                        </p>
+                    </section>
+
+                    <nav style="margin-top:12px">
+                        <a class="btn-back" href="produtos.html" style="display:inline-block">Voltar para Produtos</a>
+                    </nav>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer" style="background:linear-gradient(180deg,transparent,var(--rose-pale));border-radius:8px;">
+            © Moda Elegante — todos os direitos reservados
+        </footer>
+    </div>
 </body>
 </html>

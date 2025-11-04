@@ -4,38 +4,133 @@
     <meta charset="UTF-8">
     <title>Vestido Floral - Moda Elegante</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS externo (padronizado do site) -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- CSS incorporado específico desta página -->
+    <style>
+        :root{
+            --bg:#fff6fb;
+            --rose-soft:#ffeef6;
+            --rose-mid:#ffd6ea;
+            --accent:#ff6c99;
+            --muted:#7b4d63;
+            --text:#4a2a34;
+            --card:#ffffffee;
+            --radius:12px;
+        }
+
+        /* Layout padrão: header -> nav -> main -> footer */
+        html,body{height:100%;margin:0;font-family:'Baloo 2',system-ui,Arial;background:linear-gradient(180deg,var(--bg),#fff);color:var(--text)}
+        .site{min-height:100vh;display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:16px}
+
+        header.site-header{background:linear-gradient(180deg,var(--rose-soft),transparent);padding:18px;border-radius:var(--radius);text-align:center}
+        header.site-header h1{margin:0;color:var(--accent);font-size:26px}
+
+        /* Nav (abaixo do header) - menu dinâmico só com CSS */
+        nav.site-nav{background:var(--card);padding:10px;border-radius:var(--radius);box-shadow:0 8px 20px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
+        .nav-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .brand-small{font-weight:700;color:var(--accent);display:none}
+
+        /* checkbox hack */
+        .menu-toggle{position:absolute;left:-9999px}
+        label.menu-btn{display:none;cursor:pointer;padding:8px 12px;border-radius:10px;background:transparent;border:2px solid rgba(0,0,0,0.04);font-weight:700}
+        ul.menu{list-style:none;margin:0;padding:0;display:flex;gap:12px;align-items:center;justify-content:center}
+        ul.menu li{margin:0}
+        ul.menu a{display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:700;border:2px solid transparent;transition:all .16s}
+        ul.menu a:hover{background:rgba(255,108,153,0.06);border-color:rgba(255,108,153,0.08)}
+        ul.menu a.active{background:linear-gradient(180deg,var(--accent),#ff84b3);color:#fff;box-shadow:0 8px 18px rgba(255,82,145,0.12)}
+
+        main.site-main{flex:1;padding:18px;max-width:980px;margin:0 auto}
+        .product-card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,0.04);display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+        .product-media img,.product-media picture{width:100%;height:auto;border-radius:10px;display:block}
+        .product-media video{width:100%;border-radius:10px}
+        .product-info p{color:var(--muted);line-height:1.5}
+        .product-info strong{color:var(--text)}
+
+        footer.site-footer{text-align:center;padding:14px;color:var(--muted);font-size:13px;background:linear-gradient(180deg,transparent,var(--rose-soft));border-radius:var(--radius)}
+
+        /* responsivo: menu compacto (somente CSS) e layout em coluna */
+        @media(max-width:820px){
+            .brand-small{display:block}
+            label.menu-btn{display:inline-block}
+            ul.menu{flex-direction:column;display:none;padding-top:8px}
+            /* exibir menu quando checkbox marcado */
+            .menu-toggle:checked + label.menu-btn + ul.menu{display:flex}
+            .product-card{grid-template-columns:1fr;gap:12px}
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Vestido Floral</h1>
-        <picture>
-            <source srcset="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=facearea&w=600&q=80" type="image/jpeg">
-            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Vestido Floral em modelo" width="300">
-        </picture>
-        <video width="320" height="240" controls>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>
-    </header>
-    <main>
-        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Vestido Floral" width="300">
-        <section>
-            <p>
-                O Vestido Floral da Moda Elegante é perfeito para ocasiões especiais e para o dia a dia. 
-                Confeccionado com tecido leve e confortável, possui estampa floral exclusiva, modelagem moderna e acabamento de alta qualidade.
-                Ideal para quem busca estilo, elegância e praticidade em uma única peça.
-            </p>
-            <p>
-                <strong>Características:</strong><br>
-                - Tecido: Viscose<br>
-                - Tamanhos: P, M, G, GG<br>
-                - Cores disponíveis: Azul, Rosa, Verde<br>
-                - Lavagem fácil e rápida secagem
-            </p>
-        </section>
-        <nav>
-            <a href="produtos.html">Voltar para Produtos</a>
+    <div class="site">
+        <header class="site-header">
+            <h1>Vestido Floral</h1>
+            <div style="margin-top:8px;color:var(--muted);font-weight:600">Moda Elegante — coleção primavera</div>
+        </header>
+
+        <nav class="site-nav" aria-label="Navegação principal">
+            <div class="nav-top">
+                <div class="brand-small" style="font-size:16px">Moda Elegante</div>
+                <div>
+                    <input id="menu-toggle" class="menu-toggle" type="checkbox" aria-hidden="true">
+                    <label for="menu-toggle" class="menu-btn" aria-hidden="true">☰ Menu</label>
+                </div>
+            </div>
+
+            <ul class="menu" role="menubar" aria-label="links principais">
+                <li role="none"><a role="menuitem" href="index.html">Início</a></li>
+                <li role="none"><a role="menuitem" href="produtos.html" class="active">Produtos</a></li>
+                <li role="none"><a role="menuitem" href="sobre.html">Sobre</a></li>
+                <li role="none"><a role="menuitem" href="contato.html">Contato</a></li>
+            </ul>
         </nav>
-    </main>
+
+        <main class="site-main" role="main">
+            <article class="product-card" role="article">
+                <div class="product-media">
+                    <picture>
+                        <source srcset="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=cover&w=800&q=80" type="image/jpeg">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Vestido Floral em modelo" style="width:100%;border-radius:10px">
+                    </picture>
+
+                    <div style="margin-top:12px">
+                        <video controls style="width:100%;border-radius:10px">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Vestido Floral" style="width:100%;max-width:320px;border-radius:10px;display:block;margin-bottom:12px">
+                    <section>
+                        <p>
+                            O Vestido Floral da Moda Elegante é perfeito para ocasiões especiais e para o dia a dia. 
+                            Confeccionado com tecido leve e confortável, possui estampa floral exclusiva, modelagem moderna e acabamento de alta qualidade.
+                        </p>
+                        <p>
+                            <strong>Características:</strong><br>
+                            - Tecido: Viscose<br>
+                            - Tamanhos: P, M, G, GG<br>
+                            - Cores disponíveis: Azul, Rosa, Verde<br>
+                            - Lavagem fácil e rápida secagem
+                        </p>
+                    </section>
+
+                    <nav style="margin-top:12px">
+                        <a href="produtos.html" style="display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#ff84b3);color:#fff;text-decoration:none;font-weight:700">Voltar para Produtos</a>
+                    </nav>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            © Moda Elegante — todos os direitos reservados
+        </footer>
+    </div>
 </body>
 </html>

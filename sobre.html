@@ -4,50 +4,137 @@
     <meta charset="UTF-8">
     <title>Sobre - Moda Elegante</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS externo (padronizado do site) -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- CSS incorporado (regras desta página: layout header -> nav -> main -> footer + menu CSS-only) -->
+    <style>
+        :root{
+            --bg:#fff6fb;
+            --rose-1:#ffeef6;
+            --rose-2:#ffd6ea;
+            --accent:#ff6c99;
+            --text:#4a2a34;
+            --muted:#7b4d63;
+            --card:#ffffffee;
+            --radius:12px;
+        }
+
+        /* reset e tipografia */
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0;font-family:'Baloo 2', system-ui, Arial, sans-serif;background:linear-gradient(180deg,var(--bg),#fff);color:var(--text);-webkit-font-smoothing:antialiased}
+
+        /* layout padrão: header -> nav -> main -> footer */
+        .site{min-height:100vh;display:flex;flex-direction:column;align-items:stretch;gap:16px;padding:18px;max-width:1100px;margin:0 auto}
+        header.site-header{background:linear-gradient(180deg,var(--rose-1),transparent);padding:18px;border-radius:var(--radius);text-align:center;box-shadow:0 12px 30px rgba(0,0,0,0.04)}
+        header.site-header h1{margin:0;color:var(--accent);font-size:26px}
+        header.site-header p{margin:8px 0 0;color:var(--muted)}
+
+        /* nav (abaixo do header) - menu dinâmico apenas com CSS (checkbox) */
+        nav.site-nav{background:var(--card);padding:10px;border-radius:var(--radius);box-shadow:0 8px 20px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
+        .nav-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .brand-small{font-weight:700;color:var(--accent);display:none}
+
+        /* checkbox hack (visually hidden) */
+        .menu-toggle{position:absolute;left:-9999px}
+        label.menu-btn{display:none;cursor:pointer;padding:8px 12px;border-radius:10px;background:transparent;border:2px solid rgba(0,0,0,0.04);font-weight:700}
+        ul.menu-list{list-style:none;margin:0;padding:0;display:flex;gap:12px;align-items:center;justify-content:center}
+        ul.menu-list li{margin:0}
+        ul.menu-list a{display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:700;border:2px solid transparent;transition:all .16s}
+        ul.menu-list a:hover{background:rgba(255,108,153,0.06);border-color:rgba(255,108,153,0.08)}
+        ul.menu-list a.active{background:linear-gradient(180deg,var(--accent),#ff84b3);color:#fff;box-shadow:0 8px 18px rgba(255,82,145,0.12)}
+
+        /* main content */
+        main.site-main{background:transparent;padding:0 6px 18px}
+        figure{margin:16px 0;padding:0}
+        figure img{width:100%;max-width:900px;border-radius:10px;display:block;margin:0 auto}
+        figure figcaption{color:var(--muted);text-align:center;margin-top:8px;font-size:0.95rem}
+
+        video{width:100%;max-width:900px;border-radius:10px;display:block;margin:12px auto;background:var(--rose-2)}
+
+        section{margin:12px 0;padding:10px;border-radius:10px;background:linear-gradient(180deg,rgba(255,238,246,0.6),transparent)}
+
+        /* footer */
+        footer.site-footer{text-align:center;padding:14px;color:var(--muted);font-size:13px}
+
+        /* responsivo: menu compacto e exibição em coluna para telas pequenas */
+        @media(max-width:820px){
+            .brand-small{display:block}
+            label.menu-btn{display:inline-block}
+            ul.menu-list{flex-direction:column;display:none;padding-top:8px}
+            .menu-toggle:checked + label.menu-btn + ul.menu-list{display:flex}
+            nav.site-nav{padding:10px}
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Sobre a Moda Elegante</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contato.html">Contato</a></li>
+    <div class="site" role="document">
+        <header class="site-header" style="background:linear-gradient(180deg,var(--rose-2),transparent);">
+            <h1 style="font-size:28px;margin-bottom:6px">Sobre a Moda Elegante</h1>
+            <p style="margin:0;color:var(--muted)">Estilo, qualidade e cuidado em cada peça</p>
+        </header>
+
+        <!-- nav abaixo do header; menu dinâmico apenas com CSS -->
+        <nav class="site-nav" aria-label="Navegação principal">
+            <div class="nav-top">
+                <div class="brand-small">Moda Elegante</div>
+                <div>
+                    <input id="menu-toggle" class="menu-toggle" type="checkbox" aria-hidden="true">
+                    <label for="menu-toggle" class="menu-btn" aria-hidden="true">☰ Menu</label>
+                </div>
+            </div>
+
+            <ul class="menu-list" role="menubar" aria-label="links principais">
+                <li role="none"><a role="menuitem" href="index.html">Início</a></li>
+                <li role="none"><a role="menuitem" href="produtos.html">Produtos</a></li>
+                <li role="none"><a role="menuitem" href="sobre.html" class="active">Sobre</a></li>
+                <li role="none"><a role="menuitem" href="cadastro.html">Cadastro</a></li>
             </ul>
         </nav>
-        <figure>
-            <img src="imagens/loja-moda-elegante.jpg" alt="Fachada da loja Moda Elegante" width="600" />
-            <figcaption>Fachada da nossa loja principal</figcaption>
-        </figure>
-        <section>
-            <h2>Conheça nosso vídeo institucional</h2>
-            <video width="600" controls poster="imagens/video-capa.jpg">
-                <source src="videos/institucional.mp4" type="video/mp4">
-                <source src="videos/institucional.webm" type="video/webm">
-                Seu navegador não suporta a reprodução de vídeo.
-            </video>
-        </section>
-    </header>
-    <main>
-        <section>
-            <h2>Nossa missão</h2>
-            <p>
-                Oferecer produtos de moda de alta qualidade, promovendo estilo, conforto e confiança para nossos clientes.
-            </p>
-        </section>
-        <section>
-            <h2>Nossa visão</h2>
-            <p>
-                Ser referência nacional em inovação e tendências no setor de moda, inspirando pessoas a expressarem sua individualidade.
-            </p>
-        </section>
-        <section>
-            <h2>Nossos valores</h2>
-            <p>
-                Ética, respeito ao cliente, sustentabilidade, criatividade e compromisso com a excelência.
-            </p>
-        </section>
-    </main>
+
+        <main class="site-main" role="main">
+            <figure>
+                <!-- imagem com estilo inline (exemplo de CSS inline) -->
+                <img src="imagens/loja-moda-elegante.jpg" alt="Fachada da loja Moda Elegante" width="900" style="box-shadow:0 12px 30px rgba(0,0,0,0.06)">
+                <figcaption>Fachada da nossa loja principal</figcaption>
+            </figure>
+
+            <section>
+                <h2 style="margin-top:0;color:var(--accent)">Conheça nosso video institucional</h2>
+                <video controls poster="imagens/video-capa.jpg">
+                    <source src="file:///home/professo/Documentos/isa/istockphoto-1655643568-640_adpp_is.mp4" type="video/mp4">
+                </video>
+            </section>
+
+            <section>
+                <h2 style="color:var(--accent)">Nossa missão</h2>
+                <p>
+                    Oferecer produtos de moda de alta qualidade, promovendo estilo, conforto e confiança para nossos clientes.
+                </p>
+            </section>
+
+            <section>
+                <h2 style="color:var(--accent)">Nossa visão</h2>
+                <p>
+                    Ser referência nacional em inovação e tendências no setor de moda, inspirando pessoas a expressarem sua individualidade.
+                </p>
+            </section>
+
+            <section>
+                <h2 style="color:var(--accent)">Nossos valores</h2>
+                <p>
+                    Ética, respeito ao cliente, sustentabilidade, criatividade e compromisso com a excelência.
+                </p>
+            </section>
+        </main>
+
+        <footer class="site-footer" style="background:linear-gradient(180deg,transparent,var(--rose-1));border-radius:8px">
+            © Moda Elegante — todos os direitos reservados
+        </footer>
+    </div>
 </body>
 </html>

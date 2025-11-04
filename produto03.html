@@ -4,46 +4,142 @@
     <meta charset="UTF-8">
     <title>Calça Jeans - Moda Elegante</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fonte externa -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS externo padronizado do site -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- CSS incorporado específico desta página (cores pastéis, layout e menu CSS-only) -->
+    <style>
+        :root{
+            --bg:#fff6fb;
+            --rose-1:#ffeef6;
+            --rose-2:#ffd6ea;
+            --accent:#ff6c99;
+            --accent-2:#ff3f7a;
+            --text:#4a2a34;
+            --muted:#7b4d63;
+            --card:rgba(255,255,255,0.95);
+            --radius:12px;
+            --gap:14px;
+        }
+
+        /* base: header -> nav -> main -> footer */
+        html,body{height:100%;margin:0;font-family:'Baloo 2', system-ui, Arial, sans-serif;background:linear-gradient(180deg,var(--bg),#fff);color:var(--text);-webkit-font-smoothing:antialiased}
+        .site{min-height:100vh;display:flex;flex-direction:column;gap:var(--gap);align-items:stretch;padding:18px;max-width:1100px;margin:0 auto}
+
+        header.site-header{background:linear-gradient(180deg,var(--rose-1),transparent);padding:18px;border-radius:var(--radius);text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.04)}
+        header.site-header h1{margin:0;color:var(--accent);font-size:28px}
+        header.site-header p{margin:6px 0 0;color:var(--muted)}
+
+        /* nav (abaixo do header) - menu dinâmico só com CSS (checkbox hack) */
+        nav.site-nav{background:var(--card);padding:10px;border-radius:var(--radius);box-shadow:0 8px 20px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
+        .nav-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .brand-small{font-weight:700;color:var(--accent);display:none}
+
+        /* visually-hidden checkbox */
+        .menu-toggle{position:absolute;left:-9999px}
+        label.menu-btn{display:none;cursor:pointer;padding:8px 12px;border-radius:10px;background:transparent;border:2px solid rgba(0,0,0,0.04);font-weight:700}
+        ul.menu-list{list-style:none;margin:0;padding:0;display:flex;gap:12px;align-items:center;justify-content:center}
+        ul.menu-list li{margin:0}
+        ul.menu-list a{display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:700;border:2px solid transparent;transition:all .16s}
+        ul.menu-list a:hover{background:rgba(255,108,153,0.06);border-color:rgba(255,108,153,0.08)}
+        ul.menu-list a.active{background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 18px rgba(255,82,145,0.12)}
+
+        /* main / produto */
+        main.site-main{flex:1;padding:6px}
+        .product{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;background:var(--card);padding:16px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.04)}
+        .product img{width:100%;height:auto;border-radius:10px;display:block}
+        .product video,audio{width:100%;border-radius:8px;background:transparent}
+        .product h2{margin-top:0;color:var(--accent)}
+        .meta{color:var(--muted);line-height:1.5}
+
+        footer.site-footer{text-align:center;padding:14px;color:var(--muted);font-size:13px;background:linear-gradient(180deg,transparent,var(--rose-2));border-radius:8px}
+
+        /* responsivo: menu compacto e coluna */
+        @media(max-width:820px){
+            .brand-small{display:block}
+            label.menu-btn{display:inline-block}
+            ul.menu-list{flex-direction:column;display:none;padding-top:8px}
+            .menu-toggle:checked + label.menu-btn + ul.menu-list{display:flex}
+            .product{grid-template-columns:1fr}
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Calça Jeans</h1>
-    </header>
-    <main>
-        <figure>
-            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c" alt="Calça Jeans" width="300">
-            <figcaption>Calça Jeans - Moda Elegante</figcaption>
-        </figure>
-        <section>
-            <p>
-                A Calça Jeans da Moda Elegante combina estilo, conforto e versatilidade para todas as ocasiões. 
-                Feita com denim de alta qualidade, proporciona ajuste perfeito ao corpo e alta durabilidade, sendo uma peça essencial no guarda-roupa.
-            </p>
-            <p>
-                <strong>Características:</strong><br>
-                - Tecido: Denim 100% algodão<br>
-                - Tamanhos: 36, 38, 40, 42, 44<br>
-                - Cores disponíveis: Azul claro, Azul escuro, Preto<br>
-                - Modelagem moderna e bolsos funcionais
-            </p>
-        </section>
-        <section>
-            <h2>Vídeo do Produto</h2>
-            <video width="320" height="240" controls>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                Seu navegador não suporta o elemento de vídeo.
-            </video>
-        </section>
-        <section>
-            <h2>Áudio de Apresentação</h2>
-            <audio controls>
-                <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
-                Seu navegador não suporta o elemento de áudio.
-            </audio>
-        </section>
-        <nav>
-            <a href="produtos.html">Voltar para Produtos</a>
+    <div class="site">
+        <header class="site-header" style="background:linear-gradient(180deg,var(--rose-2),transparent);">
+            <h1 style="font-weight:700">Calça Jeans</h1>
+            <p style="margin:6px 0 0;color:var(--muted)">Moda Elegante — conforto e estilo</p>
+        </header>
+
+        <nav class="site-nav" aria-label="Navegação principal">
+            <div class="nav-top">
+                <div class="brand-small" style="font-size:16px">Moda Elegante</div>
+                <div>
+                    <input id="menu-toggle" class="menu-toggle" type="checkbox" aria-hidden="true">
+                    <label for="menu-toggle" class="menu-btn" aria-hidden="true">☰ Menu</label>
+                </div>
+            </div>
+
+            <ul class="menu-list" role="menubar" aria-label="links principais">
+                <li role="none"><a role="menuitem" href="index.html">Início</a></li>
+                <li role="none"><a role="menuitem" href="produtos.html" class="active">Produtos</a></li>
+                <li role="none"><a role="menuitem" href="sobre.html">Sobre</a></li>
+                <li role="none"><a role="menuitem" href="contato.html">Contato</a></li>
+            </ul>
         </nav>
-    </main>
+
+        <main class="site-main" role="main">
+            <article class="product" role="article">
+                <div>
+                    <figure style="margin:0">
+                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c" alt="Calça Jeans" width="800" style="border-radius:10px;">
+                        <figcaption style="color:var(--muted);margin-top:8px">Calça Jeans - Moda Elegante</figcaption>
+                    </figure>
+
+                    <div style="margin-top:12px">
+                        <video controls style="border-radius:8px">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                </div>
+
+                <div>
+                    <h2>Descrição</h2>
+                    <p class="meta">A Calça Jeans da Moda Elegante combina estilo, conforto e versatilidade para todas as ocasiões. Feita com denim de alta qualidade, proporciona ajuste perfeito ao corpo e alta durabilidade.</p>
+
+                    <section style="margin-top:12px">
+                        <h3 style="margin:0;color:var(--accent)">Características</h3>
+                        <p class="meta" style="margin-top:6px">
+                            - Tecido: Denim 100% algodão<br>
+                            - Tamanhos: 36, 38, 40, 42, 44<br>
+                            - Cores: Azul claro, Azul escuro, Preto<br>
+                            - Modelagem moderna e bolsos funcionais
+                        </p>
+                    </section>
+
+                    <section style="margin-top:12px">
+                        <h3 style="margin:0;color:var(--accent)">Áudio de apresentação</h3>
+                        <audio controls style="margin-top:8px;">
+                            <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                    </section>
+
+                    <nav style="margin-top:12px">
+                        <a href="produtos.html" style="display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;text-decoration:none;font-weight:700">Voltar para Produtos</a>
+                    </nav>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            © Moda Elegante — todos os direitos reservados
+        </footer>
+    </div>
 </body>
 </html>
